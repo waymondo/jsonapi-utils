@@ -217,11 +217,10 @@ module JSONAPI
         #
         # @api private
         def turn_into_resource(record, options)
-          if options[:resource]
-            options[:resource].to_s.constantize.new(record, context)
-          else
-            @request.resource_klass.new(record, context)
-          end
+          specified_resource = options[:resource]
+          return @request.resource_klass.new(record, context) unless specified_resource
+          specified_resource = specified_resource.call(record) if specified_resource.is_a?(Proc)
+          specified_resource.to_s.constantize.new(record, context)
         end
 
         # Get JSONAPI::Resource for source object
