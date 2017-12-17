@@ -38,7 +38,7 @@ module JSONAPI
           paginator.links_page_params(record_count: record_count_for(records, options))
         end
 
-        # Apply memoization to the record count result avoiding duplicate counts.
+        # Apply memoization to the record count result avoiding then duplicate counts.
         #
         # @param records [ActiveRecord::Relation, Array] collection of records
         #   e.g.: User.all or [{ id: 1, name: 'Tiago' }, { id: 2, name: 'Doug' }]
